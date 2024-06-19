@@ -3,5 +3,5 @@ from django.contrib.auth.models import User
 
 
 class Category(models.Model):
-    name = models.CharField()
+    name = models.CharField(max_length=200)
     
