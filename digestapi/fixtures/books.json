@@ -1,0 +1,26 @@
+[
+    {
+        "user": 1,
+        "title": "The Great Gatsby",
+        "author": "F. Scott Fitzgerald",
+        "isbn_number": "9780743273565",
+        "cover_image": "https://www.gutenberg.org/cache/epub/64317/pg64317.cover.medium.jpg",
+        "categories": [1, 2]
+    },
+    {
+        "user": 2,
+        "title": "To Kill a Mockingbird",
+        "author": "Harper Lee",
+        "isbn_number": "9780060935467",
+        "cover_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCibbXCps_WHszTiYPAj5ylrT-VKSOwRoaLQ&s",
+        "categories": [2, 3]
+    },
+    {
+        "user": 1,
+        "title": "1984",
+        "author": "George Orwell",
+        "isbn_number": "9780451524935",
+        "cover_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-7VF1iEh6OKl8Mj1SC74MyB3rlbvDybjwuw&s",
+        "categories": [1, 3]
+    }
+]
