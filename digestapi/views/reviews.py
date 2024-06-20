@@ -30,7 +30,7 @@ class ReviewViewSet(viewsets.ViewSet):
         # Return the serialized data with 200 status code
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-
+#  create is a function but is a method on the class ReviewViewSet
     def create(self, request):
         """Handle POST operations
 
@@ -66,6 +66,12 @@ class ReviewViewSet(viewsets.ViewSet):
 
 
     def retrieve(self, request, pk=None):
+        """Handle GET operations
+
+        Returns:
+            Response -- JSON serialized instance
+        """
+        
         try:
             # Get the requested review
             review = BookReview.objects.get(pk=pk)
@@ -78,21 +84,27 @@ class ReviewViewSet(viewsets.ViewSet):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
 
-    # def destroy(self, request, pk=None):
-    #     try:
-    #         # Get the requested review
-    #         review = Review.objects.get(pk=pk)
+    def destroy(self, request, pk=None):
+        """Handle DELETE operations
 
-    #         # Check if the user has permission to delete
-    #         # Will return 403 if authenticated user is not author
-    #         if review.user.id != request.user.id:
-    #             return Response(status=status.HTTP_403_FORBIDDEN)
+        Returns:
+            Response -- None
+        """
+        try:
+            # Get the requested review
+            # this sets us up for the if statement
+            review = BookReview.objects.get(pk=pk)
 
-    #         # Delete the review
-    #         review.delete()
+            # Check if the user has permission to delete
+            # Will return 403 if authenticated user is not author
+            if review.user.id != request.user.id:
+                return Response(status=status.HTTP_403_FORBIDDEN)
 
-    #         # Return success but no body
-    #         return Response(status=status.HTTP_204_NO_CONTENT)
+            # Delete the review
+            review.delete()
 
-    #     except Review.DoesNotExist:
-    #         return Response(status=status.HTTP_404_NOT_FOUND)
+            # Return success but no body
+            return Response(status=status.HTTP_204_NO_CONTENT)
+
+        except BookReview.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)

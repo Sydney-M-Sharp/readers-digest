@@ -6,9 +6,16 @@ from .categories import CategorySerializer
 
 
 class BookSerializer(serializers.ModelSerializer):
-    is_owner = serializers.SerializerMethodField()
+    # Override default serialization to replace foreign keys
+    # with expanded related resource. By default, this would
+    # be a list of integers (e.g. [2, 4, 9]).
     categories = CategorySerializer(many=True)
 
+    # Declare that an ad-hoc property should be included in JSON
+    is_owner = serializers.SerializerMethodField()
+
+    # Function containing instructions for ad-hoc property
+    #  get_is_owner is assigning value to is_owner and are tied to gether by abstracting
     def get_is_owner(self, obj):
         # Check if the authenticated user is the owner
         return self.context['request'].user == obj.user
@@ -19,7 +26,6 @@ class BookSerializer(serializers.ModelSerializer):
 
 
 class BookViewSet(viewsets.ViewSet):
-
 
     def list(self, request):
         books = Book.objects.all()
